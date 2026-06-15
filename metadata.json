@@ -1,0 +1,5 @@
+{
+  "name": "Chat Context Changer - Self Host",
+  "description": "A chat application that allows users to interact with Gemini and dynamically rewrite the entire conversation history using a specialized tool.",
+  "requestFramePermissions": []
+}
