@@ -6,7 +6,7 @@ import ConfirmationModal from './components/ConfirmationModal';
 import ApiKeyModal from './components/ApiKeyModal';
 import PromptModal from './components/PromptModal';
 import { sendMessageStream, rewriteHistory, hasConfiguredApiKey } from './services/geminiService';
-import { Key, Pencil, ShieldAlert } from 'lucide-react';
+import { Key, Pencil, Settings2, ShieldAlert } from 'lucide-react';
 
 const App: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -15,6 +15,7 @@ const App: React.FC = () => {
   const [showResetModal, setShowResetModal] = useState(false);
   const [showApiKeyModal, setShowApiKeyModal] = useState(false);
   const [showPromptModal, setShowPromptModal] = useState(false);
+  const [showMobileHeaderTools, setShowMobileHeaderTools] = useState(false);
   const [keyConfigured, setKeyConfigured] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -110,8 +111,9 @@ const App: React.FC = () => {
   return (
     <div className="flex flex-col h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200 px-4 sm:px-6 py-4 flex items-center justify-between shadow-sm z-10 select-none">
-        <div className="flex items-center gap-3">
+      <header className="bg-white border-b border-gray-200 px-4 sm:px-6 py-4 shadow-sm z-10 select-none">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
           <button
             type="button"
             onClick={() => setShowResetModal(true)}
@@ -147,12 +149,23 @@ const App: React.FC = () => {
             </svg>
             <span className="text-sm font-semibold hidden sm:inline">New Chat</span>
           </button>
-        </div>
+          </div>
         
-        <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
+           <button
+             type="button"
+             onClick={() => setShowMobileHeaderTools((prev) => !prev)}
+             className="inline-flex items-center justify-center rounded-lg border border-gray-200 bg-white p-2 text-gray-600 shadow-sm transition-all duration-200 hover:bg-gray-50 hover:text-gray-800 focus:outline-none md:hidden"
+             id="header_mobile_tools_toggle"
+             aria-label="Open settings"
+             aria-expanded={showMobileHeaderTools}
+           >
+             <Settings2 className="w-4 h-4" />
+           </button>
+
            <button 
              onClick={() => setShowApiKeyModal(true)}
-             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs sm:text-sm font-semibold transition-all duration-205 shadow-sm focus:outline-none ${
+             className={`hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs sm:text-sm font-semibold transition-all duration-205 shadow-sm focus:outline-none ${
                keyConfigured
                  ? 'bg-emerald-50 border-emerald-200 text-emerald-700 hover:bg-emerald-100'
                  : 'bg-amber-50 border-amber-300 text-amber-700 hover:bg-amber-100 animate-pulse'
@@ -167,14 +180,45 @@ const App: React.FC = () => {
            <button
              type="button"
              onClick={() => setShowPromptModal(true)}
-             className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-gray-200 bg-white text-xs sm:text-sm font-semibold text-gray-600 transition-all duration-200 shadow-sm hover:bg-gray-50 hover:text-gray-800 focus:outline-none"
+             className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-gray-200 bg-white text-xs sm:text-sm font-semibold text-gray-600 transition-all duration-200 shadow-sm hover:bg-gray-50 hover:text-gray-800 focus:outline-none"
              id="header_edit_prompts_btn"
            >
              <Pencil className="w-3.5 h-3.5" />
              <span>Edit Prompts</span>
            </button>
+          </div>
         </div>
       </header>
+
+      {showMobileHeaderTools && (
+        <div className="border-b border-gray-200 bg-white px-4 py-3 shadow-sm md:hidden">
+          <div className="flex flex-wrap items-center justify-end gap-2">
+            <button 
+              onClick={() => setShowApiKeyModal(true)}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-semibold transition-all duration-200 shadow-sm focus:outline-none ${
+                keyConfigured
+                  ? 'bg-emerald-50 border-emerald-200 text-emerald-700 hover:bg-emerald-100'
+                  : 'bg-amber-50 border-amber-300 text-amber-700 hover:bg-amber-100 animate-pulse'
+              }`}
+              id="mobile_header_api_key_btn"
+              title={keyConfigured ? "Personal key configured" : "Configure API key"}
+            >
+              <Key className="w-3.5 h-3.5" />
+              <span>{keyConfigured ? 'Personal Key' : 'Set API Key'}</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setShowPromptModal(true)}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-gray-200 bg-white text-xs font-semibold text-gray-600 transition-all duration-200 shadow-sm hover:bg-gray-50 hover:text-gray-800 focus:outline-none"
+              id="mobile_header_edit_prompts_btn"
+            >
+              <Pencil className="w-3.5 h-3.5" />
+              <span>Edit Prompts</span>
+            </button>
+          </div>
+        </div>
+      )}
 
       {!keyConfigured && (
         <div className="bg-amber-500 text-white px-4 py-2.5 text-sm font-medium flex items-center justify-between shadow-md animate-fadeIn z-10 border-b border-amber-600 select-none">
