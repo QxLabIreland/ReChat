@@ -8,9 +8,3 @@ export interface Message {
   text: string;
   id: string; // Unique ID for React keys
 }
-
-export interface ChatState {
-  messages: Message[];
-  isLoading: boolean;
-  error: string | null;
-}

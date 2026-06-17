@@ -134,17 +134,6 @@ export const hasConfiguredApiKey = (): boolean => {
   return getApiKey().length > 0;
 };
 
-/**
- * Checks if custom saved api key is used
- */
-export const isUsingCustomApiKey = (): boolean => {
-  if (typeof window !== 'undefined') {
-    const custom = localStorage.getItem('rechat_custom_api_key');
-    return !!(custom && custom.trim() !== '');
-  }
-  return false;
-};
-
 const getAIClient = (): GoogleGenAI => {
   const apiKey = getApiKey();
   if (!apiKey) {
