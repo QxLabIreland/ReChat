@@ -186,6 +186,18 @@ const App: React.FC = () => {
              <Pencil className="w-3.5 h-3.5" />
              <span>Edit Prompts</span>
            </button>
+
+           <a
+             href="https://github.com/QxLabIreland/ReChat"
+             target="_blank"
+             rel="noreferrer"
+             className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-gray-200 bg-white text-xs sm:text-sm font-semibold text-gray-600 transition-all duration-200 shadow-sm hover:bg-gray-50 hover:text-gray-800 focus:outline-none"
+             id="header_github_link"
+             title="Open GitHub repository"
+           >
+             <img src="/images/GitHub_Invertocat_Black.svg" alt="" className="w-3.5 h-3.5" />
+             <span>GitHub</span>
+           </a>
           </div>
         </div>
       </header>
@@ -216,6 +228,18 @@ const App: React.FC = () => {
               <Pencil className="w-3.5 h-3.5" />
               <span>Edit Prompts</span>
             </button>
+
+            <a
+              href="https://github.com/QxLabIreland/ReChat"
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-gray-200 bg-white text-xs font-semibold text-gray-600 transition-all duration-200 shadow-sm hover:bg-gray-50 hover:text-gray-800 focus:outline-none"
+              id="mobile_header_github_link"
+              title="Open GitHub repository"
+            >
+              <img src="/images/GitHub_Invertocat_Black.svg" alt="" className="w-3.5 h-3.5" />
+              <span>GitHub</span>
+            </a>
           </div>
         </div>
       )}
