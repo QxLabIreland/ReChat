@@ -1,6 +1,8 @@
 
 # ReChat
 
+This repository is a public implementation of the Mutable Transcripts prototype described in the NeurIPS 2026 paper "Mutable Transcripts: Mitigating Context Pollution through Editable Conversation State." A prebuilt version of the app is available at https://mutablechat.netlify.app/
+
 ReChat is a configurable chat interface to conduct research into Mutable Transcripts. Mutable Transcripts is an interaction paradigm that enables users to revise prior conversational turns through natural language edit requests, allowing the conversation history itself to be updated rather than appended. This reframes the transcript from a passive record into an editable representation of conversational state. We present a working prototype that integrates transcript-level revision into a standard chat interface. 
 
 <p align="center">
@@ -12,23 +14,30 @@ conversational turns are updating. (C) The UI refreshes with the updated convers
 
 ## Paper
 
-Paper PDF: [ToDO: Add public paper link]
+Arxiv: [ToDO: Add public paper link]
 
-Cite as: [ToDO: Add citation]
+Cite as: 
+```
+Barry, Dan and Hines, Andrew. "Mutable Transcripts: Mitigating Context Pollution through Editable Conversation State" Advances in Neural Information Processing Systems 39, 2026. 
+```
 
 BibTeX:
 
 ```bibtex
-% ToDO: Add BibTeX entry
+@inproceedings{dbarry2026mutable,
+  author    = {Barry, Dan and Hines, Andrew},
+  title     = {Mutable Transcripts: Mitigating Context Pollution through Editable Conversation State},
+  booktitle = {Advances in Neural Information Processing Systems 39},
+  year      = {2026},
+  note      = {To appear}
+}
 ```
 
-This repository is a public version of the Mutable Transcripts prototype accompanying the paper. It preserves the paper defaults, including the default prompts and interaction structure, while exposing additional configuration options for public use, such as user-supplied Gemini API keys, model selection, and editable prompts.
+This repository is a public version of the Mutable Transcripts prototype accompanying the NeurIPS 2026 paper. It preserves the paper defaults, including the default prompts and interaction structure, while exposing additional configuration options for public use, such as user-supplied Gemini API keys, model selection, and editable prompts.
 
 This repo should therefore be understood as a public-facing research artifact rather than a locked reproduction of the exact study environment. The default configuration matches the paper, but users can modify settings through the interface.
 
 Any changes to the model or prompts may cause behavior to diverge from the results and examples described in the paper.
-
-
 
 
 ## What This Repo Implements
@@ -47,12 +56,12 @@ Any changes to the model or prompts may cause behavior to diverge from the resul
 
 These defaults are the initial configuration presented by the public app.
 
-## What You Can Change
+## What the User Can Change
 
 - Gemini API key
 - Model selection
-- System prompt
-- Rewrite prompt
+- System prompt (standard chat mode system prompt)
+- Rewrite prompt (prompt used in the rewrite mode to edit prior conversational history)
 
 ## Privacy And Storage
 
@@ -71,9 +80,13 @@ Prerequisite: Node.js
    `npm run dev`
 3. Open the app in your browser and enter your personal Gemini API key when prompted.
 
-## Deploy To Netlify
+## Example Web Deployment To Netlify
 
-1. Connect the repository to Netlify.
-2. Use `npm run build` as the build command.
-3. Use `dist` as the publish directory.
-4. Do not configure a server-side Gemini key in Netlify env vars for this app.
+Netlify (https://www.netlify.com/) is a popular platform for deploying static websites and frontend applications like this one. The prebuilt version of the app is hosted on Netlify at https://mutablechat.netlify.app/
+
+To deploy your own instance of the app to Netlify, follow these steps:
+
+1. Create a new project on Netlify and connect the repository containing this app.
+2. In deployment settings, use `npm run build` as the build command.
+3. In deployment settings, use `dist` as the publish directory.
+4. Do not configure a server-side Gemini key in Netlify env vars for this app. The interface will prompt users to enter their personal Gemini API key directly in the browser.
